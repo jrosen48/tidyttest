@@ -6,7 +6,7 @@ tidyttest
 The goal of tidyttest is to make a t-test function that:
 
 -   Can be used as part of a "pipeline"
--   Is easy to use programattically (i.e., as part of a function from the `apply` or `map` families)
+-   Is easy to use programattically (i.e., as part of a function from the `apply()` or `purrr::map()` families)
 
 Installation
 ------------
