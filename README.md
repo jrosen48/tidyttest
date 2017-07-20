@@ -39,7 +39,7 @@ storms_ss <- storms %>%
     filter(status %in% c("tropical depression", "tropical storm")) %>% 
     mutate(category = as.integer(category))
 
-t_tester(dv = category, fac = status, df = storms_ss)
+t_test(dv = category, fac = status, df = storms_ss)
 #> [1] "mean in group tropical depression  is  1"
 #> [1] "mean in group tropical storm  is  2"
 #> [1] "Test statistic is  -4375"
@@ -47,10 +47,10 @@ t_tester(dv = category, fac = status, df = storms_ss)
 #> [1] "Effect size is  -109.07"
 ```
 
-It outputs a `data.frame`:
+It outputs a `tibble`:
 
 ``` r
-t_test_df <- t_tester(dv = category, fac = status, df = storms_ss)
+t_test_df <- t_test(dv = category, fac = status, df = storms_ss)
 #> [1] "mean in group tropical depression  is  1"
 #> [1] "mean in group tropical storm  is  2"
 #> [1] "Test statistic is  -4375"
