@@ -40,7 +40,7 @@ storms_ss <- storms %>%
     filter(status %in% c("tropical depression", "tropical storm")) %>% 
     mutate(category = as.integer(category))
 
-t_tester(dv = category, fac = status, df = storms_ss)
+t_test(dv = category, fac = status, df = storms_ss)
 ```
 
 It outputs a `data.frame`:
