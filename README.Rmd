@@ -46,6 +46,6 @@ t_test(dv = category, fac = status, df = storms_ss)
 It outputs a `data.frame`:
 
 ```{r}
-t_test_df <- t_tester(dv = category, fac = status, df = storms_ss)
+t_test_df <- t_test(dv = category, fac = status, df = storms_ss)
 t_test_df
 ```
