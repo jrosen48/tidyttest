@@ -1,1 +1,5 @@
 R function to compare two means using a t-test; returns the group means, test statistic and associated p-value, and effect size (Cohen's D)
+
+# Installation
+
+    devtools::install_github("jrosen48/tidyttest")
