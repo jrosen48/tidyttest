@@ -21,7 +21,7 @@ devtools::install_github("jrosen48/tidyttest")
 Example
 -------
 
-This is a basic example which shows you how to use the `t_tester()` function:
+This is a basic example which shows you how to use the `t_test()` function:
 
 ``` r
 library(dplyr)
