@@ -23,7 +23,7 @@ The goal of tidyttest is to make a t-test function that:
 
 You can install tidyttest from github with:
 
-```{r gh-installation, eval = FALSE}
+```{r gh-installation, eval = FALSE, message = F}
 # install.packages("devtools")
 devtools::install_github("jrosen48/tidyttest")
 ```
