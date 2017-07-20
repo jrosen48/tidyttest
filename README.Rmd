@@ -1,0 +1,51 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# tidyttest
+
+The goal of tidyttest is to make a t-test function that:
+
+- Can be used as part of a "pipeline"
+- Is easy to use programattically (i.e)
+
+## Installation
+
+You can install tidyttest from github with:
+
+```{r gh-installation, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("jrosen48/tidyttest")
+```
+
+## Example
+
+This is a basic example which shows you how to use the `t_tester()` function:
+
+```{r example}
+library(dplyr)
+library(tidyttest)
+
+storms_ss <- storms %>% 
+    filter(status %in% c("tropical depression", "tropical storm")) %>% 
+    mutate(category = as.integer(category))
+
+t_tester(dv = category, fac = status, df = storms_ss)
+```
+
+It outputs a `data.frame`:
+
+```{r}
+t_test_df <- t_tester(dv = category, fac = status, df = storms_ss)
+t_test_df
+```
