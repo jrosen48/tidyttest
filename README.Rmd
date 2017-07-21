@@ -45,6 +45,11 @@ storms %>%
 It outputs a `data.frame`:
 
 ```{r}
-t_test_df <- t_test(storms, category, status)
+
+storms_ss <- storms %>% 
+    filter(status %in% c("tropical depression", "tropical storm")) %>% 
+    mutate(category = as.integer(category))
+
+t_test_df <- t_test(storms_ss, category, status)
 t_test_df
 ```
