@@ -32,7 +32,7 @@ devtools::install_github("jrosen48/tidyttest")
 
 This is a basic example which shows you how to use the `t_test()` function:
 
-```{r example}
+```{r example, message = F}
 library(dplyr)
 library(tidyttest)
 
