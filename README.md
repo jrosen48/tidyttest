@@ -11,7 +11,7 @@ The goal of tidyttest is to make a t-test function that:
 Installation
 ------------
 
-You can install tidyttest from github with:
+You can install tidyttest from GitHub with:
 
 ``` r
 # install.packages("devtools")
