@@ -1,12 +1,31 @@
-t_test <- function(dv, fac, df) {
+#' R function to perform a "tidy" t-test
+#' @details R function to compare two means using a t-test; returns the group means, test statistic and associated p-value, and effect size (Cohen's D).
+#' @param df data frame with the dependent and group variable
+#' @param dv raw (unquoted) name of the dependent variable
+#' @param group raw (unquoted) name of the grouping variable
+#' @return A data frame containing the group means, test statistic and associated p-value, and effect size (Cohen's D)
+#' @examples
+#' storms %>%
+#'     filter(status %in% c("tropical depression", "tropical storm")) %>%
+#'     mutate(category = as.integer(category)) %>%
+#'     t_test(dv = category, group = status)
+#' storms_ss <- storms %>%
+#'     filter(status %in% c("tropical depression", "tropical storm")) %>%
+#'     mutate(category = as.integer(category))
+#'
+#' t_test_df <- t_test(storms_ss, dv = category)
+#' t_test_df
+#' @export
+
+t_test <- function(df, dv, group) {
 
     dv_q <- as.character(substitute(dv))
-    fac_q <- as.character(substitute(fac))
+    group_q <- as.character(substitute(group))
 
-    dv_enquo <- enquo(dv)
-    fac_enquo <- enquo(fac)
+    dv_enquo <- dplyr::enquo(dv)
+    group_enquo <- dplyr::enquo(group)
 
-    the_formula <- as.formula(paste(dv_q, " ~ ", fac_q))
+    the_formula <- stats::as.formula(paste(dv_q, " ~ ", group_q))
     test_results <- stats::t.test(the_formula, data = df)
 
     print(paste(names(test_results$estimate[1]), " is ", round(test_results$estimate[1], 3)))
@@ -15,7 +34,7 @@ t_test <- function(dv, fac, df) {
     print(paste("Test statistic is ", round(test_results$statistic, 3)))
     print(paste("P-value is ", round(test_results$p.value, 3)))
 
-    the_ns <- dplyr::count(df, !! fac_enquo)
+    the_ns <- dplyr::count(df, !! group_enquo)
     the_ns <- dplyr::pull(the_ns, n)
 
     effect_size_results <- compute.es::tes(test_results$statistic,
