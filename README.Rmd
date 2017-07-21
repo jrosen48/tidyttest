@@ -42,7 +42,18 @@ storms %>%
     t_test(category, status)
 ```
 
-It outputs a `data.frame`:
+It outputs a `tibble`:
+
+```{r}
+t_test_df <- storms %>% 
+    filter(status %in% c("tropical depression", "tropical storm")) %>% 
+    mutate(category = as.integer(category)) %>% 
+    t_test(category, status)
+
+t_test_df
+```
+
+You can also use it without a pipeline:
 
 ```{r}
 

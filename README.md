@@ -38,7 +38,27 @@ storms %>%
 #> [1] "Effect size is  -109.07"
 ```
 
-It outputs a `data.frame`:
+It outputs a `tibble`:
+
+``` r
+t_test_df <- storms %>% 
+    filter(status %in% c("tropical depression", "tropical storm")) %>% 
+    mutate(category = as.integer(category)) %>% 
+    t_test(category, status)
+#> [1] "mean in group tropical depression  is  1"
+#> [1] "mean in group tropical storm  is  2"
+#> [1] "Test statistic is  -4375"
+#> [1] "P-value is  0"
+#> [1] "Effect size is  -109.07"
+
+t_test_df
+#> # A tibble: 1 x 5
+#>   group_1_mean group_2_mean test_statistic p_value effect_size
+#>          <dbl>        <dbl>          <dbl>   <dbl>       <dbl>
+#> 1            1            2          -4375       0     -109.07
+```
+
+You can also use it without a pipeline:
 
 ``` r
 
