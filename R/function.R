@@ -4,11 +4,14 @@
 #' @param dv raw (unquoted) name of the dependent variable
 #' @param group raw (unquoted) name of the grouping variable
 #' @return A data frame containing the group means, test statistic and associated p-value, and effect size (Cohen's D)
+#' @importFrom magrittr '%>%'
 #' @examples
+#' library(dplyr)
 #' storms %>%
 #'     filter(status %in% c("tropical depression", "tropical storm")) %>%
 #'     mutate(category = as.integer(category)) %>%
 #'     t_test(dv = category, group = status)
+#'
 #' storms_ss <- storms %>%
 #'     filter(status %in% c("tropical depression", "tropical storm")) %>%
 #'     mutate(category = as.integer(category))
@@ -32,7 +35,7 @@ t_test <- function(df, dv, group) {
     print(paste(names(test_results$estimate[2]), " is ", round(test_results$estimate[2], 3)))
 
     print(paste("Test statistic is ", round(test_results$statistic, 3)))
-    print(paste("P-value is ", round(test_results$p.value, 3)))
+    print(paste("P-value is ", round(test_results$p.value, )))
 
     the_ns <- dplyr::count(df, !! group_enquo)
     the_ns <- dplyr::pull(the_ns, n)
@@ -44,12 +47,13 @@ t_test <- function(df, dv, group) {
 
     print(paste("Effect size is ", effect_size_results$d))
 
-    out <- dplyr::data_frame(group_1_mean = round(test_results$estimate[1], 3),
-                             group_2_mean = round(test_results$estimate[2], 3),
-                             test_statistic = round(test_results$statistic, 3),
-                             p_value = round(test_results$p.value, 3),
-                             effect_size = effect_size_results$d)
-
-    invisible(out)
+    broom::tidy(test_results)
+    # out <- dplyr::data_frame(group_1_mean = round(test_results$estimate[1], 3),
+    #                          group_2_mean = round(test_results$estimate[2], 3),
+    #                          test_statistic = round(test_results$statistic, 3),
+    #                          p_value = round(test_results$p.value, 3),
+    #                          effect_size = effect_size_results$d)
+    #
+    # invisible(out)
 
 }

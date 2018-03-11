@@ -23,10 +23,12 @@ R function to perform a "tidy" t-test
 R function to compare two means using a t-test; returns the group means, test statistic and associated p-value, and effect size (Cohen's D).
 }
 \examples{
+library(dplyr)
 storms \%>\%
     filter(status \%in\% c("tropical depression", "tropical storm")) \%>\%
     mutate(category = as.integer(category)) \%>\%
     t_test(dv = category, group = status)
+
 storms_ss <- storms \%>\%
     filter(status \%in\% c("tropical depression", "tropical storm")) \%>\%
     mutate(category = as.integer(category))
